@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="108dp"
+    android:height="108dp"
+    android:viewportWidth="108"
+    android:viewportHeight="108">
+
+    <!-- Infinity circle aura -->
+    <path
+        android:fillColor="#339B5DE5"
+        android:pathData="M54,20 A34,34 0 1,1 53.9,20 Z" />
+
+    <!-- Soccer ball icon center -->
+    <path
+        android:fillColor="#EEEEEE"
+        android:pathData="M54,36 A18,18 0 1,1 53.9,36 Z" />
+    <path
+        android:fillColor="#080812"
+        android:pathData="M54,42 L58,48 L52,52 L46,48 L50,42 Z" />
+    <path
+        android:fillColor="#080812"
+        android:pathData="M54,36 L58,42 L54,42 L50,42 L54,36 Z" />
+    <path
+        android:fillColor="#080812"
+        android:pathData="M46,48 L44,54 L50,52 L46,48 Z" />
+    <path
+        android:fillColor="#080812"
+        android:pathData="M62,48 L64,54 L58,52 L62,48 Z" />
+
+    <!-- FA text -->
+    <path
+        android:fillColor="#9B5DE5"
+        android:pathData="M28,72 L32,60 L36,60 L40,72 L37,72 L36.5,70 L31.5,70 L31,72 Z M32,68 L36,68 L34,63 Z" />
+    <path
+        android:fillColor="#00BBF9"
+        android:pathData="M42,60 L52,60 L52,63 L45,63 L45,64.5 L51,64.5 L51,67.5 L45,67.5 L45,72 L42,72 Z" />
+    <path
+        android:fillColor="#F15BB5"
+        android:pathData="M56,60 L59,60 L59,69 L65,69 L65,72 L56,72 Z" />
+    <path
+        android:fillColor="#52B788"
+        android:pathData="M67,60 L77,60 L77,63 L73,63 L73,72 L70,72 L70,63 L67,63 Z" />
+</vector>

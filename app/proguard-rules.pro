@@ -1,0 +1,6 @@
+-keep class com.fitai.tracker.api.** { *; }
+-keep class com.fitai.tracker.data.model.** { *; }
+-keepattributes Signature
+-keepattributes *Annotation*
+-dontwarn okhttp3.**
+-dontwarn retrofit2.**
