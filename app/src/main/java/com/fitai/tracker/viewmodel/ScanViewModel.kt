@@ -8,10 +8,14 @@ import com.fitai.tracker.data.model.FoodEntry
 import com.fitai.tracker.data.model.MealType
 import com.fitai.tracker.data.model.NutritionInfo
 import com.fitai.tracker.data.repository.FoodRepository
+import com.fitai.tracker.data.repository.SettingsRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.map
+import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -24,21 +28,23 @@ sealed class ScanState {
 
 @HiltViewModel
 class ScanViewModel @Inject constructor(
-    private val repository: FoodRepository
+    private val repository: FoodRepository,
+    private val settings: SettingsRepository
 ) : ViewModel() {
 
     private val _scanState = MutableStateFlow<ScanState>(ScanState.Idle)
     val scanState: StateFlow<ScanState> = _scanState.asStateFlow()
 
-    private val _apiKey = MutableStateFlow(BuildConfig.CLAUDE_API_KEY)
-    val apiKey: StateFlow<String> = _apiKey.asStateFlow()
+    val apiKey: StateFlow<String> = settings.claudeApiKey
+        .map { stored -> stored.ifBlank { BuildConfig.CLAUDE_API_KEY } }
+        .stateIn(viewModelScope, SharingStarted.Eagerly, BuildConfig.CLAUDE_API_KEY)
 
     fun analyzeImage(uri: Uri) {
         viewModelScope.launch {
             _scanState.value = ScanState.Analyzing
-            val key = _apiKey.value
+            val key = apiKey.value
             if (key.isBlank()) {
-                _scanState.value = ScanState.Error("API key not set. Go to Settings to add your Claude API key.")
+                _scanState.value = ScanState.Error("API key not set. Tap the key icon to add your Claude API key.")
                 return@launch
             }
 
@@ -80,7 +86,9 @@ class ScanViewModel @Inject constructor(
     }
 
     fun updateApiKey(key: String) {
-        _apiKey.value = key
+        viewModelScope.launch {
+            settings.setClaudeApiKey(key.trim())
+        }
     }
 
     fun resetScan() {

@@ -11,6 +11,7 @@ import androidx.compose.ui.Modifier
 import androidx.navigation.compose.rememberNavController
 import com.fitai.tracker.ui.navigation.AppNavigation
 import com.fitai.tracker.ui.navigation.BottomNavBar
+import com.fitai.tracker.ui.theme.DarkBackground
 import com.fitai.tracker.ui.theme.FitAiTrackerTheme
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -25,10 +26,11 @@ class MainActivity : ComponentActivity() {
                 Scaffold(
                     modifier = Modifier.fillMaxSize(),
                     bottomBar = { BottomNavBar(navController) },
-                    containerColor = com.fitai.tracker.ui.theme.DarkBackground
+                    containerColor = DarkBackground
                 ) { paddingValues ->
                     AppNavigation(
                         navController = navController,
+                        modifier = Modifier.padding(paddingValues)
                     )
                 }
             }

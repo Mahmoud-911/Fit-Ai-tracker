@@ -1,24 +1,23 @@
 package com.fitai.tracker.ui.screens
 
 import android.Manifest
-import android.content.Context
 import android.net.Uri
-import android.util.Log
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
-import androidx.camera.core.*
-import androidx.camera.lifecycle.ProcessCameraProvider
-import androidx.camera.view.PreviewView
-import androidx.compose.animation.*
 import androidx.compose.animation.core.*
 import androidx.compose.foundation.*
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
-import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.*
+import androidx.compose.material.icons.automirrored.filled.ArrowBack
+import androidx.compose.material.icons.filled.CameraAlt
+import androidx.compose.material.icons.filled.CheckCircle
+import androidx.compose.material.icons.filled.Key
+import androidx.compose.material.icons.filled.PhotoLibrary
+import androidx.compose.material.icons.filled.Refresh
+import androidx.compose.material.icons.filled.Save
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
@@ -30,13 +29,10 @@ import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.platform.LocalLifecycleOwner
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.compose.ui.viewinterop.AndroidView
-import androidx.core.content.ContextCompat
 import androidx.core.content.FileProvider
 import androidx.hilt.navigation.compose.hiltViewModel
 import coil.compose.AsyncImage
@@ -50,7 +46,6 @@ import com.fitai.tracker.ui.theme.*
 import com.fitai.tracker.viewmodel.ScanState
 import com.fitai.tracker.viewmodel.ScanViewModel
 import java.io.File
-import java.util.concurrent.Executors
 
 @OptIn(ExperimentalPermissionsApi::class, ExperimentalMaterial3Api::class)
 @Composable
@@ -172,7 +167,7 @@ private fun ScanTopBar(onBack: () -> Unit, onApiKey: () -> Unit) {
         verticalAlignment = Alignment.CenterVertically
     ) {
         IconButton(onClick = onBack) {
-            Icon(Icons.Default.ArrowBack, "Back", tint = TextPrimary)
+            Icon(Icons.AutoMirrored.Filled.ArrowBack, "Back", tint = TextPrimary)
         }
         Column(modifier = Modifier.weight(1f)) {
             Text(
@@ -314,10 +309,10 @@ private fun ScanActionButton(
 ) {
     Card(
         modifier = modifier.clickable(onClick = onClick),
-        shape = RoundedCornerShape(20.dp),
+        shape = RoundedCornerShape(18.dp),
         colors = CardDefaults.cardColors(containerColor = DarkCard),
-        border = BorderStroke(1.dp, color.copy(0.4f)),
-        elevation = CardDefaults.cardElevation(8.dp)
+        border = BorderStroke(0.5.dp, IosSeparator),
+        elevation = CardDefaults.cardElevation(0.dp)
     ) {
         Column(
             modifier = Modifier.padding(20.dp),
@@ -325,16 +320,14 @@ private fun ScanActionButton(
         ) {
             Box(
                 modifier = Modifier
-                    .size(60.dp)
-                    .clip(RoundedCornerShape(18.dp))
-                    .background(
-                        Brush.radialGradient(listOf(color.copy(0.3f), color.copy(0.1f)))
-                    ),
+                    .size(56.dp)
+                    .clip(RoundedCornerShape(16.dp))
+                    .background(color.copy(alpha = 0.15f)),
                 contentAlignment = Alignment.Center
             ) {
-                Icon(icon, null, tint = color, modifier = Modifier.size(30.dp))
+                Icon(icon, null, tint = color, modifier = Modifier.size(26.dp))
             }
-            Spacer(Modifier.height(10.dp))
+            Spacer(Modifier.height(12.dp))
             Text(label, style = MaterialTheme.typography.titleSmall, color = TextPrimary)
             Text(subtitle, style = MaterialTheme.typography.labelSmall, color = TextSecondary)
         }
@@ -559,7 +552,7 @@ private fun SuccessView(
             modifier = Modifier.horizontalScroll(rememberScrollState()),
             horizontalArrangement = Arrangement.spacedBy(8.dp)
         ) {
-            MealType.values().forEach { type ->
+            MealType.entries.forEach { type ->
                 FilterChip(
                     selected = type == selectedMealType,
                     onClick = { onMealTypeChange(type) },

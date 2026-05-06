@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="dark_background">#FF080812</color>
-    <color name="gojo_violet">#FF9B5DE5</color>
-    <color name="domain_blue">#FF00BBF9</color>
-    <color name="text_primary">#FFEEEEEE</color>
+    <color name="dark_background">#FF000000</color>
+    <color name="ios_blue">#FF0A84FF</color>
+    <color name="ios_cyan">#FF64D2FF</color>
+    <color name="text_primary">#FFFFFFFF</color>
 </resources>

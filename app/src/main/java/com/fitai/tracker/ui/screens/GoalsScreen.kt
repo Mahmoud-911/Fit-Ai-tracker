@@ -129,7 +129,7 @@ private fun GoalSettingsTab(
     ) {
         Text("Choose Your Goal", style = MaterialTheme.typography.titleMedium, color = TextPrimary)
 
-        GoalType.values().forEach { goalType ->
+        GoalType.entries.forEach { goalType ->
             GoalTypeCard(
                 goalType = goalType,
                 isSelected = goal.goalType == goalType,
@@ -138,7 +138,7 @@ private fun GoalSettingsTab(
         }
 
         Spacer(Modifier.height(4.dp))
-        Divider(color = TextTertiary.copy(0.3f))
+        HorizontalDivider(color = TextTertiary.copy(0.3f))
         Spacer(Modifier.height(4.dp))
 
         Text("Athlete Profile", style = MaterialTheme.typography.titleMedium, color = TextPrimary)
@@ -182,7 +182,7 @@ private fun GoalSettingsTab(
             modifier = Modifier.fillMaxWidth().horizontalScroll(rememberScrollState()),
             horizontalArrangement = Arrangement.spacedBy(8.dp)
         ) {
-            FootballPosition.values().forEach { position ->
+            FootballPosition.entries.forEach { position ->
                 FilterChip(
                     selected = goal.position == position,
                     onClick = { viewModel.updatePosition(position) },
@@ -512,7 +512,7 @@ private fun SampleMealPlanCard(goalType: GoalType) {
                     )
                 }
                 if (meal != mealPlan.last().first) {
-                    Divider(color = TextTertiary.copy(0.2f), modifier = Modifier.padding(vertical = 2.dp))
+                    HorizontalDivider(color = TextTertiary.copy(0.2f), modifier = Modifier.padding(vertical = 2.dp))
                 }
             }
         }

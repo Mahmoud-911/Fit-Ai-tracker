@@ -5,38 +5,43 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.darkColorScheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.SideEffect
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.toArgb
 import androidx.compose.ui.platform.LocalView
 import androidx.core.view.WindowCompat
 
-private val JJKDarkColorScheme = darkColorScheme(
-    primary = GojoViolet,
-    onPrimary = TextPrimary,
-    primaryContainer = GojoVioletDark,
-    onPrimaryContainer = GojoVioletLight,
-    secondary = DomainBlue,
+// iOS-style dark color scheme keyed off systemBlue.
+private val IosDarkColorScheme = darkColorScheme(
+    primary = IosBlue,
+    onPrimary = Color.White,
+    primaryContainer = IosBlueDark,
+    onPrimaryContainer = IosBlueLight,
+    secondary = IosCyan,
     onSecondary = DarkBackground,
     secondaryContainer = DomainBlueDark,
-    onSecondaryContainer = DomainBlue,
-    tertiary = YujiPink,
-    onTertiary = DarkBackground,
-    tertiaryContainer = CursedRedDark,
-    onTertiaryContainer = YujiPinkLight,
+    onSecondaryContainer = IosCyan,
+    tertiary = IosIndigo,
+    onTertiary = Color.White,
+    tertiaryContainer = MegumiDark,
+    onTertiaryContainer = IosBlueLight,
     error = CursedRed,
-    onError = TextPrimary,
+    onError = Color.White,
     background = DarkBackground,
     onBackground = TextPrimary,
     surface = DarkSurface,
     onSurface = TextPrimary,
     surfaceVariant = DarkCard,
     onSurfaceVariant = TextSecondary,
-    outline = TextTertiary,
+    surfaceContainer = DarkCard,
+    surfaceContainerHigh = DarkCardElevated,
+    surfaceContainerHighest = DarkCardElevated,
+    outline = IosSeparator,
     outlineVariant = DarkCardElevated,
-    scrim = DarkBackground,
+    scrim = Color.Black,
     inverseSurface = TextPrimary,
     inverseOnSurface = DarkBackground,
-    inversePrimary = GojoVioletDark,
-    surfaceTint = GojoViolet
+    inversePrimary = IosBlueDark,
+    surfaceTint = IosBlue
 )
 
 @Composable
@@ -55,7 +60,7 @@ fun FitAiTrackerTheme(content: @Composable () -> Unit) {
     }
 
     MaterialTheme(
-        colorScheme = JJKDarkColorScheme,
+        colorScheme = IosDarkColorScheme,
         typography = AppTypography,
         content = content
     )

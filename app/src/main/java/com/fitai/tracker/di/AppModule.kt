@@ -2,6 +2,7 @@ package com.fitai.tracker.di
 
 import android.content.Context
 import androidx.room.Room
+import com.fitai.tracker.BuildConfig
 import com.fitai.tracker.api.ClaudeApiService
 import com.fitai.tracker.data.local.AppDatabase
 import dagger.Module
@@ -22,10 +23,6 @@ object AppModule {
 
     @Provides
     @Singleton
-    fun provideContext(@ApplicationContext context: Context): Context = context
-
-    @Provides
-    @Singleton
     fun provideDatabase(@ApplicationContext context: Context): AppDatabase =
         Room.databaseBuilder(context, AppDatabase::class.java, "fitai_db")
             .fallbackToDestructiveMigration()
@@ -35,7 +32,10 @@ object AppModule {
     @Singleton
     fun provideOkHttpClient(): OkHttpClient = OkHttpClient.Builder()
         .addInterceptor(HttpLoggingInterceptor().apply {
-            level = HttpLoggingInterceptor.Level.BODY
+            level = if (BuildConfig.DEBUG) HttpLoggingInterceptor.Level.BASIC
+                    else HttpLoggingInterceptor.Level.NONE
+            redactHeader("x-api-key")
+            redactHeader("authorization")
         })
         .connectTimeout(60, TimeUnit.SECONDS)
         .readTimeout(60, TimeUnit.SECONDS)

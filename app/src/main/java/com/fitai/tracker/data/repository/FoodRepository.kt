@@ -16,6 +16,7 @@ import com.fitai.tracker.data.model.AthleteGoal
 import com.fitai.tracker.data.model.FoodEntry
 import com.fitai.tracker.data.model.GoalType
 import com.fitai.tracker.data.model.NutritionInfo
+import dagger.hilt.android.qualifiers.ApplicationContext
 import kotlinx.coroutines.flow.Flow
 import org.json.JSONObject
 import java.io.ByteArrayOutputStream
@@ -27,7 +28,7 @@ import javax.inject.Singleton
 class FoodRepository @Inject constructor(
     private val db: AppDatabase,
     private val claudeApi: ClaudeApiService,
-    private val context: Context
+    @ApplicationContext private val context: Context
 ) {
     fun getEntriesForToday(): Flow<List<FoodEntry>> =
         db.foodEntryDao().getEntriesForDate(LocalDate.now().toString())

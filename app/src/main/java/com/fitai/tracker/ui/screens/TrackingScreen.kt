@@ -27,7 +27,6 @@ import java.time.format.DateTimeFormatter
 @Composable
 fun TrackingScreen(viewModel: HomeViewModel = hiltViewModel()) {
     val state by viewModel.uiState.collectAsState()
-    var selectedDate by remember { mutableStateOf(LocalDate.now()) }
 
     Box(
         modifier = Modifier
@@ -36,7 +35,7 @@ fun TrackingScreen(viewModel: HomeViewModel = hiltViewModel()) {
     ) {
         LazyColumn(
             modifier = Modifier.fillMaxSize(),
-            contentPadding = PaddingValues(bottom = 100.dp)
+            contentPadding = PaddingValues(bottom = 16.dp)
         ) {
             item {
                 TrackingHeader()
@@ -202,9 +201,9 @@ private fun WeeklyBarChart(
                                     modifier = Modifier
                                         .fillMaxWidth()
                                         .height(1.dp)
+                                        .align(Alignment.BottomStart)
+                                        .offset(y = -(80 * targetPct).dp)
                                         .background(CalorieOrange.copy(0.5f))
-                                        .align(Alignment.CenterStart)
-                                        .offset(y = (-(80 * targetPct)).dp)
                                 )
                             }
                             Text(

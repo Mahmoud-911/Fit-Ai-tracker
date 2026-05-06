@@ -3,7 +3,6 @@ package com.fitai.tracker.data.model
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 import java.time.LocalDate
-import java.time.LocalDateTime
 
 @Entity(tableName = "food_entries")
 data class FoodEntry(
@@ -107,37 +106,40 @@ data class JJKCharacter(
     val secondaryColor: Long
 )
 
+// Each character gets a slot on the iOS systemBlue spectrum.
+// Primary = the dominant accent shown in headers / highlights.
+// Secondary = a complementary tint used for borders / soft fills.
 val JJK_CHARACTERS = listOf(
     JJKCharacter(
         name = "Gojo Satoru",
         title = "The Strongest",
         quote = "Throughout Heaven and Earth, I alone am the honored one.\nNow eat right and become limitless!",
         associatedGoal = GoalType.PEAK_PERFORMANCE,
-        primaryColor = 0xFF9B5DE5,
-        secondaryColor = 0xFF00BBF9
+        primaryColor = 0xFF0A84FF,    // systemBlue
+        secondaryColor = 0xFF64D2FF   // systemCyan
     ),
     JJKCharacter(
         name = "Yuji Itadori",
         title = "Divergent Fist",
         quote = "I will eat properly and die surrounded by people!\nEvery rep, every meal, every gram of protein counts!",
         associatedGoal = GoalType.BUILD_MUSCLE,
-        primaryColor = 0xFFF15BB5,
-        secondaryColor = 0xFFFF9F1C
+        primaryColor = 0xFF409CFF,    // light systemBlue
+        secondaryColor = 0xFF40CBE0   // teal
     ),
     JJKCharacter(
         name = "Megumi Fushiguro",
         title = "Ten Shadows",
         quote = "I don't care about being a hero.\nBut disciplined nutrition? That I can respect.",
         associatedGoal = GoalType.MAINTAIN,
-        primaryColor = 0xFF4CC9F0,
-        secondaryColor = 0xFF1A2035
+        primaryColor = 0xFF5E5CE6,    // systemIndigo
+        secondaryColor = 0xFF1E2A4A   // midnight
     ),
     JJKCharacter(
         name = "Nobara Kugisaki",
         title = "Straw Doll",
         quote = "Whether it's a cursed spirit or stubborn fat—\nI'll smash it all! Protein first!",
         associatedGoal = GoalType.LOSE_WEIGHT,
-        primaryColor = 0xFFFF9F1C,
-        secondaryColor = 0xFFB5651D
+        primaryColor = 0xFF64D2FF,    // systemCyan
+        secondaryColor = 0xFF8DE2EE   // ice blue
     )
 )
